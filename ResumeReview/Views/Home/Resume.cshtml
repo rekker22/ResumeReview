@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Resume";
+    var imageName = ViewData["ImageName"];
+}
+
+@{ Layout = "~/Views/Shared/_ViewLayout.cshtml"; }
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <figure class="front">
+            <img src="~/DummyImages/@imageName" />
+        </figure>
+        <figure class="back">
+            <h1>Submit Review</h1>,
+            <input type="text" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </figure>
+    </div>
+</div>
+
+<script>
+    setTimeout(myFunction, 10000);
+    function myFunction() {
+        var card = document.querySelector('.flip-card-inner');
+        card.classList.toggle('is-flipped');
+        console.log("Flipped");
+    }
+</script>

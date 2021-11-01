@@ -1,0 +1,53 @@
+﻿@model ResumeReviewFileUpload
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_ViewLayout.cshtml";
+}
+
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+
+<div class="text-center w-100">
+    <a class="btn btn-primary m-1" asp-area="" asp-controller="Home" asp-action="Resume">Review other's Resume</a>
+    <form enctype="multipart/form-data" method="post" class="m-1">
+        <div class="form-group">
+            <label asp-for="@Model.FileUpload">Please Upload your Resume, To get reviewed :</label>
+            <input asp-for="@Model.FileUpload" type="file" accept="image/*">
+            <span asp-validation-for="@Model.FileUpload"></span>
+        </div>
+        <input asp-controller="Home" asp-action="Upload" class="btn btn-primary" type="submit" value="Upload" />
+    </form>
+</div>
+<div class="row m-3 w-100">
+    @foreach (var resumereview in Model.resumeReviews)
+    {
+        <div class="card text-center m-3 p-1" style="width: 250px; height: 400px; overflow: scroll;">
+            <h5>Resume Version:  @resumereview.Resume.VersionNumber</h5>
+            <form method="post">
+                @if (resumereview.Resume.IsActive == true)
+                {
+                <input asp-controller="Home" asp-action="Disable" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-dark text-white m-1" style="width:100px;" type="submit" value="Disable" />
+                }
+                else
+                {
+                    <input asp-controller="Home" asp-action="Enable" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-dark text-white m-1" style="width:100px;" type="submit" value="Enable"/>
+                }
+                <input asp-controller="Home" asp-action="Delete" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-danger text-white m-1" style="width:100px;" type="submit" value="Delete"/>
+            </form>
+                <ul class="list-group list-group-flush">
+                @foreach (var review in resumereview.Reviews)
+                {
+                    <li class="list-group-item"><p>@review.Review</p></li>
+
+                }
+            </ul>
+        </div>
+    }
+</div>
+
+
+
+
