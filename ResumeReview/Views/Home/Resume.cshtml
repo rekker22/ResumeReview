@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ResRev
+@{
     ViewData["Title"] = "Resume";
     var imageName = ViewData["ImageName"];
 }
@@ -12,12 +13,16 @@
 <div class="flip-card">
     <div class="flip-card-inner">
         <figure class="front">
-            <img src="~/DummyImages/@imageName" />
+            <img src="~/DummyImages/@Model.Resume.Uri" />
         </figure>
         <figure class="back">
-            <h1>Submit Review</h1>,
-            <input type="text" />
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <form method="post" class="m-1">
+                <div class="form-group">
+                    <label asp-for="@Model.Review.Review">Please Upload your Resume, To get reviewed :</label>
+                    <input asp-for="@Model.Review.Review" type="text">
+                </div>
+                <input asp-controller="Home" asp-action="Submit" asp-route-ResumeId="@Model.Resume.ResumeId" class="btn btn-primary" type="submit" value="Submit" />
+            </form>
         </figure>
     </div>
 </div>

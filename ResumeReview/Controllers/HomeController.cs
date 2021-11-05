@@ -102,21 +102,23 @@ namespace ResumeReview.Controllers
 
             await _context.SaveChangesAsync();
 
-            List<ResumeReviews> resumereviews = new List<ResumeReviews>();
+            //List<ResumeReviews> resumereviews = new List<ResumeReviews>();
 
-            foreach (var res in resume)
-            {
-                IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(res));
-                resumereviews.Add(new ResumeReviews
-                {
-                    Reviews = reviews,
-                    Resume = res
-                });
-            }
+            //foreach (var res in resume)
+            //{
+            //    IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(res));
+            //    resumereviews.Add(new ResumeReviews
+            //    {
+            //        Reviews = reviews,
+            //        Resume = res
+            //    });
+            //}
 
-            resumeReviewFileUploads.resumeReviews = resumereviews;
+            //resumeReviewFileUploads.resumeReviews = resumereviews;
 
-            return View("Index", resumeReviewFileUploads);
+            return RedirectToAction("Index");
+
+            //return View("Index", resumeReviewFileUploads);
         }
 
         public async Task<IActionResult> DisableAsync(int ResumeId)
@@ -131,27 +133,29 @@ namespace ResumeReview.Controllers
 
             await _context.SaveChangesAsync();
 
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            IEnumerable<Resume> resume = _context.Resume.Where(x => x.UploaderId.Equals(Guid.Parse(userId))).Where(t => t.IsDeleted == false).OrderBy(o => o.VersionNumber);
+            //IEnumerable<Resume> resume = _context.Resume.Where(x => x.UploaderId.Equals(Guid.Parse(userId))).Where(t => t.IsDeleted == false).OrderBy(o => o.VersionNumber);
 
-            List<ResumeReviews> resumereviews = new List<ResumeReviews>();
+            //List<ResumeReviews> resumereviews = new List<ResumeReviews>();
 
-            foreach (var r in resume)
-            {
-                IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(r));
-                resumereviews.Add(new ResumeReviews
-                {
-                    Reviews = reviews,
-                    Resume = r
-                });
-            }
+            //foreach (var r in resume)
+            //{
+            //    IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(r));
+            //    resumereviews.Add(new ResumeReviews
+            //    {
+            //        Reviews = reviews,
+            //        Resume = r
+            //    });
+            //}
 
-            ResumeReviewFileUpload resumeReviewFileUploads = new ResumeReviewFileUpload();
+            //ResumeReviewFileUpload resumeReviewFileUploads = new ResumeReviewFileUpload();
 
-            resumeReviewFileUploads.resumeReviews = resumereviews;
+            //resumeReviewFileUploads.resumeReviews = resumereviews;
 
-            return View("Index", resumeReviewFileUploads);
+            return RedirectToAction("Index");
+
+            //return View("Index", resumeReviewFileUploads);
 
         }
         public async Task<IActionResult> DeleteAsync(int ResumeId)
@@ -164,27 +168,29 @@ namespace ResumeReview.Controllers
 
             await _context.SaveChangesAsync();
 
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            IEnumerable<Resume> resume = _context.Resume.Where(x => x.UploaderId.Equals(Guid.Parse(userId))).Where(t => t.IsDeleted == false).OrderBy(o => o.VersionNumber);
+            //IEnumerable<Resume> resume = _context.Resume.Where(x => x.UploaderId.Equals(Guid.Parse(userId))).Where(t => t.IsDeleted == false).OrderBy(o => o.VersionNumber);
 
-            List<ResumeReviews> resumereviews = new List<ResumeReviews>();
+            //List<ResumeReviews> resumereviews = new List<ResumeReviews>();
 
-            foreach (var r in resume)
-            {
-                IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(r));
-                resumereviews.Add(new ResumeReviews
-                {
-                    Reviews = reviews,
-                    Resume = r
-                });
-            }
+            //foreach (var r in resume)
+            //{
+            //    IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(r));
+            //    resumereviews.Add(new ResumeReviews
+            //    {
+            //        Reviews = reviews,
+            //        Resume = r
+            //    });
+            //}
 
-            ResumeReviewFileUpload resumeReviewFileUploads = new ResumeReviewFileUpload();
+            //ResumeReviewFileUpload resumeReviewFileUploads = new ResumeReviewFileUpload();
 
-            resumeReviewFileUploads.resumeReviews = resumereviews;
+            //resumeReviewFileUploads.resumeReviews = resumereviews;
 
-            return View("Index", resumeReviewFileUploads);
+            return RedirectToAction("Index");
+
+            //return View("Index", resumeReviewFileUploads);
 
         }
 
@@ -192,33 +198,35 @@ namespace ResumeReview.Controllers
         {
             var res = _context.Resume.Find(ResumeId);
 
-            res.IsDeleted = true;
+            res.IsActive = true;
 
             _context.Resume.Update(res);
 
             await _context.SaveChangesAsync();
 
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            IEnumerable<Resume> resume = _context.Resume.Where(x => x.UploaderId.Equals(Guid.Parse(userId))).Where(t => t.IsDeleted == false).OrderBy(o => o.VersionNumber);
+            //IEnumerable<Resume> resume = _context.Resume.Where(x => x.UploaderId.Equals(Guid.Parse(userId))).Where(t => t.IsDeleted == false).OrderBy(o => o.VersionNumber);
 
-            List<ResumeReviews> resumereviews = new List<ResumeReviews>();
+            //List<ResumeReviews> resumereviews = new List<ResumeReviews>();
 
-            foreach (var r in resume)
-            {
-                IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(r));
-                resumereviews.Add(new ResumeReviews
-                {
-                    Reviews = reviews,
-                    Resume = r
-                });
-            }
+            //foreach (var r in resume)
+            //{
+            //    IEnumerable<Reviews> reviews = _context.Reviews.Where(x => x.Resume.Equals(r));
+            //    resumereviews.Add(new ResumeReviews
+            //    {
+            //        Reviews = reviews,
+            //        Resume = r
+            //    });
+            //}
 
-            ResumeReviewFileUpload resumeReviewFileUploads = new ResumeReviewFileUpload();
+            //ResumeReviewFileUpload resumeReviewFileUploads = new ResumeReviewFileUpload();
 
-            resumeReviewFileUploads.resumeReviews = resumereviews;
+            //resumeReviewFileUploads.resumeReviews = resumereviews;
 
-            return View("Index", resumeReviewFileUploads);
+            return RedirectToAction("Index");
+
+            //return View("Index", resumeReviewFileUploads);
 
         }
 
@@ -230,10 +238,36 @@ namespace ResumeReview.Controllers
 
             Random r = new Random();
 
-            ViewData["ImageName"] = resumes.ElementAt(r.Next(resumes.Count())).Uri;
+            //ViewData["ImageName"] = resumes.ElementAt(r.Next(resumes.Count())).Uri;
 
-            //ViewData["ImageName"] = imageName;
-            return View();
+            ResRev resumereview = new ResRev();
+
+            resumereview.Resume = resumes.ElementAt(r.Next(resumes.Count()));
+
+            return View(resumereview);
+        }
+
+        public async Task<IActionResult> SubmitAsync(int ResumeId, ResRev resRev)
+        {
+
+            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var res = _context.Resume.Find(ResumeId);
+
+            var rev = new Reviews
+            {
+                Resume = res,
+                Review = resRev.Review.Review,
+                IsActive = true,
+                ReviewDate = DateTime.UtcNow,
+                ReviewerId = Guid.Parse(userId)
+            };
+
+            _context.Reviews.Add(rev);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Resume");
         }
 
         public IActionResult Privacy()

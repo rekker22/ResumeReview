@@ -14,6 +14,7 @@
     <a class="btn btn-primary m-1" asp-area="" asp-controller="Home" asp-action="Resume">Review other's Resume</a>
     <form enctype="multipart/form-data" method="post" class="m-1">
         <div class="form-group">
+            <span asp-for="@Model.resumeReviews"></span>
             <label asp-for="@Model.FileUpload">Please Upload your Resume, To get reviewed :</label>
             <input asp-for="@Model.FileUpload" type="file" accept="image/*">
             <span asp-validation-for="@Model.FileUpload"></span>
