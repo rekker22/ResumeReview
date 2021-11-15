@@ -17,6 +17,10 @@ namespace ResumeReview.Models
 
         public long FileSize { get; set; }
 
+        public string DriveResumeId { get; set; }
+
+        public string DriveId { get; set; }
+
         public string Uri { get; set; }
 
         public bool IsDeleted { get; set; }

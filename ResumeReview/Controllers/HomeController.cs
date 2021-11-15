@@ -14,6 +14,8 @@ using ResumeReview.Areas.Identity.Data;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using System.IO;
+using ResumeReview.Service;
+using Microsoft.Extensions.Configuration;
 
 namespace ResumeReview.Controllers
 {
@@ -26,14 +28,17 @@ namespace ResumeReview.Controllers
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor)
+        private readonly IConfiguration _configuration;
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _logger = logger;
             _context = applicationDbContext;
             _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
         }
 
-        string imageName = "DResume_300x250.JPG";
+        //string imageName = "DResume_300x250.JPG";
 
         [HttpGet]
         public IActionResult Index()
@@ -65,19 +70,40 @@ namespace ResumeReview.Controllers
         {
             var file = resumeReviewFileUploads.FileUpload;
 
+            if (file == null || file.Length == 0)
+                return Content("file not selected");
+
             var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             IEnumerable<Resume> resume = _context.Resume.Where(x => x.UploaderId.Equals(Guid.Parse(userId))).Where(t => t.IsDeleted == false).OrderBy(o => o.VersionNumber);
 
-            string ResumeName = userId + "/" + (resume.Last().VersionNumber + 1).ToString();
+            string ResumeName = file.FileName;
+
+            var versionNumber = (resume.Count() == 0) ? 0 : resume.LastOrDefault().VersionNumber + 1;
 
             string ResumeFileExtension = Path.GetExtension(file.FileName);
 
+            var ClientId = _configuration.GetSection("Storage")["ClientId"];
+
+            var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+
+            var DriveId = _configuration.GetSection("Storage")["ResumeStorage"];
+
+            var _fus = new FileUploadService();
+
+            
+
+            var uri = _fus.uploadFile(ClientId, ClientSecret, file, DriveId);
+
+
+
             Resume r = new Resume{
                 ResumeName = ResumeName,
-                VersionNumber = resume.Last().VersionNumber + 1,
+                VersionNumber = versionNumber,
                 FileSize = file.Length,
-                Uri = file.FileName,
+                Uri = "https://drive.google.com/uc?id=" + uri,
+                DriveId = DriveId,
+                DriveResumeId = uri,
                 IsDeleted = false,
                 IsActive = true,
                 UploadDate = DateTime.UtcNow,
@@ -88,17 +114,17 @@ namespace ResumeReview.Controllers
 
             
 
-            if (file == null || file.Length == 0)
-                return Content("file not selected");
+            //if (file == null || file.Length == 0)
+            //    return Content("file not selected");
 
-            var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot/DummyImages",
-                        file.FileName);
+            //var path = Path.Combine(
+            //            Directory.GetCurrentDirectory(), "wwwroot/DummyImages",
+            //            file.FileName);
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
+            //using (var stream = new FileStream(path, FileMode.Create))
+            //{
+            //    await file.CopyToAsync(stream);
+            //}
 
             await _context.SaveChangesAsync();
 
@@ -234,7 +260,7 @@ namespace ResumeReview.Controllers
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            IEnumerable<Resume> resumes = _context.Resume.Where(x => x.UploaderId != Guid.Parse(userId)).Where(t => t.IsDeleted == false);
+            IEnumerable<Resume> resumes = _context.Resume.Where(x => x.UploaderId != Guid.Parse(userId)).Where(t => t.IsDeleted == false).Where(t => t.IsActive == true);
 
             Random r = new Random();
 
@@ -242,9 +268,19 @@ namespace ResumeReview.Controllers
 
             ResRev resumereview = new ResRev();
 
+            if(resumes.Count() == 0) {
+
+                return RedirectToAction("NoResume");
+            }
+
             resumereview.Resume = resumes.ElementAt(r.Next(resumes.Count()));
 
             return View(resumereview);
+        }
+
+        public IActionResult NoResume()
+        {
+            return View();
         }
 
         public async Task<IActionResult> SubmitAsync(int ResumeId, ResRev resRev)
