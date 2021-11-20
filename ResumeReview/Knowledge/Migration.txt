@@ -1,5 +1,7 @@
 ﻿For Production migration
 
+to keep db connection secret we removed it from appsetting and bring up when we need migration
+
 Change Dbcontext in else to ResumeReviewDbContext and comment out the whole if not else
 
 Once done change back to applicationdbContext in else and uncomment
