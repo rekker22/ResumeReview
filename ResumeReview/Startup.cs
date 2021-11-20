@@ -32,21 +32,21 @@ namespace ResumeReview
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("DevelopmentConnection")));
 
-            
-            services.AddDbContextPool<ApplicationDbContext>(options =>
+
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            if (env == "Development")
             {
-                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-                string connStr;
-
-                // Depending on if in development or production, use either Heroku-provided
-                // connection string, or development connection string from env var.
-                if (env == "Development")
+                services.AddDbContextPool<ApplicationDbContext>(options =>
                 {
-                    connStr = Configuration.GetConnectionString("DevelopmentConnection");
+                    string connStr = Configuration.GetConnectionString("DevelopmentConnection");
                     options.UseSqlServer(connStr);
-                }
-                else
+                });
+
+            }
+            else
+            {
+                services.AddDbContextPool<ApplicationDbContext>(options =>
                 {
                     // Use connection string provided at runtime by Heroku.
                     //var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
@@ -63,14 +63,11 @@ namespace ResumeReview
                     var pgHost = pgHostPort.Split(":")[0];
                     var pgPort = pgHostPort.Split(":")[1];
 
-                    connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
+                    string connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
                     options.UseNpgsql(connStr);
-                }
 
-                // Whether the connection string came from the local development configuration file
-                // or from the environment variable from Heroku, use it to set up your DbContext.
-
-            });
+                });
+            }
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -1,0 +1,5 @@
+﻿For Production migration
+
+Change Dbcontext in else to ResumeReviewDbContext and comment out the whole if not else
+
+Once done change back to applicationdbContext in else and uncomment

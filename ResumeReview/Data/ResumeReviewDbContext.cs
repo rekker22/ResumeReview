@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ResumeReview.Areas.Identity.Data;
+using ResumeReview.Models;
 
 namespace ResumeReview.Data
 {
@@ -23,5 +24,11 @@ namespace ResumeReview.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Resume> Resume { get; set; }
+
+        public DbSet<Reviews> Reviews { get; set; }
+
+        public DbSet<UserViewed> UserViewed { get; set; }
     }
 }

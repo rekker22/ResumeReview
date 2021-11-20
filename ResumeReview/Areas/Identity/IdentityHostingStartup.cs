@@ -2,6 +2,7 @@
 using System.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,21 +22,28 @@ namespace ResumeReview.Areas.Identity
                 //services.AddDbContext<ResumeReviewDbContext>(options =>
                 //    options.UseSqlServer(
                 //        context.Configuration.GetConnectionString("ResumeReviewDbContextConnection")));
+                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-                services.AddDbContextPool<ApplicationDbContext>(options =>
+                if (env == "Development")
                 {
-                    var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                    services.AddDbContextPool<ApplicationDbContext>(options =>
+                        {
+                            string connStr = context.Configuration.GetConnectionString("DevelopmentConnection");
+                            options.UseSqlServer(connStr);
+                        });
 
-                    string connStr;
-
-                    // Depending on if in development or production, use either Heroku-provided
-                    // connection string, or development connection string from env var.
-                    if (env == "Development")
+                    services.AddDefaultIdentity<ApplicationUser>(options =>
                     {
-                        connStr = context.Configuration.GetConnectionString("DevelopmentConnection");
-                        options.UseSqlServer(connStr);
-                    }
-                    else
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireUppercase = false;
+                        options.SignIn.RequireConfirmedAccount = true;
+                    })
+                        .AddEntityFrameworkStores<ApplicationDbContext>();
+
+                }
+                else
+                {
+                    services.AddDbContextPool<ApplicationDbContext>(options =>
                     {
                         // Use connection string provided at runtime by Heroku.
                         //var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
@@ -52,17 +60,24 @@ namespace ResumeReview.Areas.Identity
                         var pgHost = pgHostPort.Split(":")[0];
                         var pgPort = pgHostPort.Split(":")[1];
 
-                        connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
+                        string connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
                         options.UseNpgsql(connStr);
-                    }
-                });
 
-                services.AddDefaultIdentity<ApplicationUser>(options => {
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireUppercase = false;
-                    options.SignIn.RequireConfirmedAccount = true;
-                })
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
+                    });
+
+                    services.AddDefaultIdentity<ApplicationUser>(options =>
+                    {
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireUppercase = false;
+                        options.SignIn.RequireConfirmedAccount = true;
+                    })
+                        .AddEntityFrameworkStores<ApplicationDbContext>();
+            }
+
+
+
+
+
             });
         }
     }
