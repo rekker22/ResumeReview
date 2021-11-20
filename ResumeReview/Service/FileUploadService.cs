@@ -31,7 +31,7 @@ namespace ResumeReview.Service
             // The file token.json stores the user's access and refresh tokens, and is created
             // automatically when the authorization flow completes for the first time.
             //string credPath = "token.json";
-            string credPath = @"/wwwroot/secret/token.json";
+            string credPath = AppDomain.CurrentDomain.BaseDirectory + "wwwroot/secret/token.json";
             credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     new ClientSecrets
                     {
