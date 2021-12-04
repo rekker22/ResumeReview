@@ -16,6 +16,7 @@ using System.Security.Claims;
 using System.IO;
 using ResumeReview.Service;
 using Microsoft.Extensions.Configuration;
+using System.Net.Http;
 
 namespace ResumeReview.Controllers
 {
@@ -30,12 +31,15 @@ namespace ResumeReview.Controllers
 
         private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _context = applicationDbContext;
             _httpContextAccessor = httpContextAccessor;
             _configuration = configuration;
+            _httpClientFactory = httpClientFactory;
         }
 
         //string imageName = "DResume_300x250.JPG";
@@ -83,17 +87,16 @@ namespace ResumeReview.Controllers
 
             string ResumeFileExtension = Path.GetExtension(file.FileName);
 
-            var ClientId = _configuration.GetSection("Storage")["ClientId"];
-
             var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
 
-            var DriveId = _configuration.GetSection("Storage")["ResumeStorage"];
+            var DriveName = _configuration.GetSection("Storage")["ResumeStorage"];
 
-            var _fus = new FileUploadService();
+            var uri = _configuration.GetSection("APIs")["Upload"];
+
+            var _fus = new FileUploadService(_httpClientFactory, ClientSecret);
 
             
-
-            var uri = _fus.uploadFile(ClientId, ClientSecret, file, DriveId);
+            var id = _fus.uploadFile(file, DriveName+ ResumeName, uri);
 
 
 
@@ -101,9 +104,8 @@ namespace ResumeReview.Controllers
                 ResumeName = ResumeName,
                 VersionNumber = versionNumber,
                 FileSize = file.Length,
-                Uri = "https://drive.google.com/uc?id=" + uri,
-                DriveId = DriveId,
-                DriveResumeId = uri,
+                DriveId = DriveName,
+                DriveResumeId = id,
                 IsDeleted = false,
                 IsActive = true,
                 UploadDate = DateTime.UtcNow,
@@ -274,6 +276,16 @@ namespace ResumeReview.Controllers
             }
 
             resumereview.Resume = resumes.ElementAt(r.Next(resumes.Count()));
+
+            var uri = _configuration.GetSection("APIs")["Temp_Url"];
+
+            var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+
+            var _fus = new FileUploadService(_httpClientFactory, ClientSecret);
+
+            var temp_uri = _fus.get_temp_link(resumereview.Resume.DriveResumeId, uri);
+
+            resumereview.Resume.Uri = temp_uri;
 
             return View(resumereview);
         }
