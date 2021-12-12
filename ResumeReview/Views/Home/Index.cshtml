@@ -11,7 +11,8 @@
     </div>*@
 
 <div class="text-center w-100">
-    <a class="btn btn-primary m-1" asp-area="" asp-controller="Home" asp-action="Resume">Review other's Resume</a>
+    <a class="btn btn-primary m-1" asp-area="" asp-controller="Home" asp-action="Resume">10 Second Review</a>
+    <a class="btn btn-primary m-1" asp-area="" asp-controller="Home" asp-action="DetailedResume">Detailed Review</a>
     <form enctype="multipart/form-data" method="post" class="m-1">
         <div class="form-group">
             <span asp-for="@Model.resumeReviews"></span>
@@ -41,7 +42,7 @@
                 <ul class="list-group list-group-flush">
                 @foreach (var review in resumereview.Reviews)
                 {
-                    <li class="list-group-item"><p>@review.Review</p></li>
+                    <li class="list-group-item"><h6 style="font-weight:bold;">Is it 10 sec Review? @review.ReviewType.Equals("ReviewNotDetailed")</h6><p>@review.Review</p></li>
 
                 }
             </ul>

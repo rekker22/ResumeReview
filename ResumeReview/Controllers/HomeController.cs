@@ -290,6 +290,39 @@ namespace ResumeReview.Controllers
             return View(resumereview);
         }
 
+        public IActionResult DetailedResume()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            IEnumerable<Resume> resumes = _context.Resume.Where(x => x.UploaderId != Guid.Parse(userId)).Where(t => t.IsDeleted == false).Where(t => t.IsActive == true);
+
+            Random r = new Random();
+
+            //ViewData["ImageName"] = resumes.ElementAt(r.Next(resumes.Count())).Uri;
+
+            ResRev resumereview = new ResRev();
+
+            if (resumes.Count() == 0)
+            {
+
+                return RedirectToAction("NoResume");
+            }
+
+            resumereview.Resume = resumes.ElementAt(r.Next(resumes.Count()));
+
+            var uri = _configuration.GetSection("APIs")["Temp_Url"];
+
+            var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+
+            var _fus = new FileUploadService(_httpClientFactory, ClientSecret);
+
+            var temp_uri = _fus.get_temp_link(resumereview.Resume.DriveResumeId, uri);
+
+            resumereview.Resume.Uri = temp_uri;
+
+            return View(resumereview);
+        }
+
         public IActionResult NoResume()
         {
             return View();
@@ -307,6 +340,31 @@ namespace ResumeReview.Controllers
                 Resume = res,
                 Review = resRev.Review.Review,
                 IsActive = true,
+                ReviewType = "ReviewNotDetailed",
+                ReviewDate = DateTime.UtcNow,
+                ReviewerId = Guid.Parse(userId)
+            };
+
+            _context.Reviews.Add(rev);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Resume");
+        }
+
+        public async Task<IActionResult> SubmitDetailedAsync(int ResumeId, ResRev resRev)
+        {
+
+            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var res = _context.Resume.Find(ResumeId);
+
+            var rev = new Reviews
+            {
+                Resume = res,
+                Review = resRev.Review.Review,
+                IsActive = true,
+                ReviewType = "ReviewDetailed",
                 ReviewDate = DateTime.UtcNow,
                 ReviewerId = Guid.Parse(userId)
             };

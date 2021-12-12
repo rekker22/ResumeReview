@@ -488,3 +488,8 @@ E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Npgsql.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\obj\Debug\net5.0\Razor\Views\Home\NoResume.cshtml.g.cs
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\obj\Debug\net5.0\ResumeReview.csproj.AssemblyReference.cache
+E:\videoyt\goodProjects\ResumeReview\ResumeReview\obj\Debug\net5.0\Razor\Views\Home\DetailedResume.cshtml.g.cs
+E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\MailKit.dll
+E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\MimeKit.dll
+E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\NETCore.MailKit.dll
+E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\BouncyCastle.Crypto.dll

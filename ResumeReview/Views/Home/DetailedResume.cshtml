@@ -1,0 +1,44 @@
+﻿@model ResRev
+@{
+    ViewData["Title"] = "Detailed Resume";
+    var imageName = ViewData["ImageName"];
+}
+
+@{ Layout = "~/Views/Shared/_ViewLayout.cshtml"; }
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <figure class="front">
+            <div class="row justify-content-center">
+                <img src="@Model.Resume.Uri" alt="Resume Loading" />
+                <a class="btn btn-primary m-1" id="front-button">Write Review Now</a>
+            </div>
+        </figure>
+        <figure class="back">
+            <form method="post" class="m-1">
+                <div class="form-group">
+                    <label asp-for="@Model.Review.Review">Please Review the Resume :</label>
+                    <textarea asp-for="@Model.Review.Review" type="text" style="width: 300px; height: 100px; overflow-wrap: break-word;"></textarea>
+                </div>
+                <input asp-controller="Home" asp-action="SubmitDetailed" asp-route-ResumeId="@Model.Resume.ResumeId" class="btn btn-primary" type="submit" value="Submit" />
+            </form>
+            <a class="btn btn-primary m-1" id="back-button">Review Resume Again</a>
+        </figure>
+    </div>
+   
+</div>
+
+<script>
+
+    document.getElementById('front-button').onclick = function () {
+        document.querySelector('.flip-card-inner').classList.toggle('is-flipped');
+    };
+
+    document.getElementById('back-button').onclick = function () {
+        document.querySelector('.flip-card-inner').classList.toggle('is-flipped');
+    };
+</script>

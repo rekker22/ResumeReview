@@ -17,6 +17,8 @@ namespace ResumeReview.Models
 
         public bool IsActive { get; set; }
 
+        public string ReviewType { get; set; }
+
         public DateTime ReviewDate { get; set; }
 
         public Guid ReviewerId { get; set; }

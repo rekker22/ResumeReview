@@ -57,6 +57,10 @@
                 {
                     <a class="btn" asp-area="" asp-controller="Home" asp-action="Resume">Skip</a>
                 }
+                else if (ViewData["Title"].Equals("Detailed Resume"))
+                {
+                    <a class="btn" asp-area="" asp-controller="Home" asp-action="DetailedResume">Skip</a>
+                }
                 else
                 {
                     <p>&copy; 2021 - ResumeReview</p>

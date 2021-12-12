@@ -24,31 +24,31 @@ namespace ResumeReview.Areas.Identity
                 //        context.Configuration.GetConnectionString("ResumeReviewDbContextConnection")));
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-                if (env == "Development")
-                {
-                    services.AddDbContextPool<ApplicationDbContext>(options =>
-                        {
-                            string connStr = context.Configuration.GetConnectionString("DevelopmentConnection");
-                            options.UseSqlServer(connStr);
-                        });
-
-                    services.AddDefaultIdentity<ApplicationUser>(options =>
+            if (env == "Development")
+            {
+                services.AddDbContextPool<ApplicationDbContext>(options =>
                     {
-                        options.Password.RequireLowercase = false;
-                        options.Password.RequireUppercase = false;
-                        options.SignIn.RequireConfirmedAccount = true;
-                    })
-                        .AddEntityFrameworkStores<ApplicationDbContext>();
+                        string connStr = context.Configuration.GetConnectionString("DevelopmentConnection");
+                        options.UseSqlServer(connStr);
+                    });
 
-                }
-                else
+                services.AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    services.AddDbContextPool<ApplicationDbContext>(options =>
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.SignIn.RequireConfirmedAccount = true;
+                })
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            }
+            else
+            {
+                services.AddDbContextPool<ApplicationDbContext>(options =>
                     {
                         // Use connection string provided at runtime by Heroku.
-                        var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                        //var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-                        //var connUrl = context.Configuration.GetConnectionString("ProductionConnection");
+                        var connUrl = context.Configuration.GetConnectionString("ProductionConnection");
                         // Parse connection URL to connection string for Npgsql
                         connUrl = connUrl.Replace("postgres://", string.Empty);
                         var pgUserPass = connUrl.Split("@")[0];
@@ -72,7 +72,7 @@ namespace ResumeReview.Areas.Identity
                         options.SignIn.RequireConfirmedAccount = true;
                     })
                         .AddEntityFrameworkStores<ApplicationDbContext>();
-            }
+                }
 
 
 

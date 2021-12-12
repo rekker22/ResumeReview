@@ -7,7 +7,7 @@
 @{
     Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
 }
-<div class="col-md-10 offset-1">
+<div class="col-md-10 offset-1 ">
     <div class="login-form-icon">
         <i class="fas fa-user-circle fa-9x text-secondary"></i>
     </div>
@@ -47,6 +47,8 @@
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
         </div>
     </form>
+    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a> | 
+    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
 </div>
 
 @section Scripts {

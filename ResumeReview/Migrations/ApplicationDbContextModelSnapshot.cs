@@ -174,10 +174,10 @@ namespace ResumeReview.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -285,6 +285,9 @@ namespace ResumeReview.Migrations
 
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ReviewerId")
                         .HasColumnType("uniqueidentifier");

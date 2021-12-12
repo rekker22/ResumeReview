@@ -21,8 +21,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "DATABASE_URL": "postgres://ujvnehhinrctfh:3a69e003c53a50744de6269773a90e45f55b0668abcc98ded1d26bcb10eb1149@ec2-54-73-110-26.eu-west-1.compute.amazonaws.com:5432/d6d1cgm4tec9g6",
-        "ASPNETCORE_ENVIRONMENT": "Production",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       },
       "dotnetRunMessages": "true",
       "applicationUrl": "https://localhost:5001;http://localhost:5000"

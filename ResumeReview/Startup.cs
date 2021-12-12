@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ResumeReview.Data;
+using ResumeReview.Models.Settings;
 using ResumeReview.Service;
 using System;
 using System.Collections.Generic;
@@ -49,9 +50,9 @@ namespace ResumeReview
                 services.AddDbContextPool<ApplicationDbContext>(options =>
                 {
                     // Use connection string provided at runtime by Heroku.
-                    var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                    //var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-                   //var connUrl = Configuration.GetConnectionString("ProductionConnection");
+                    var connUrl = Configuration.GetConnectionString("ProductionConnection");
                     // Parse connection URL to connection string for Npgsql
                     connUrl = connUrl.Replace("postgres://", string.Empty);
                     var pgUserPass = connUrl.Split("@")[0];
@@ -68,6 +69,10 @@ namespace ResumeReview
 
                 });
             }
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IEmailSender, EmailSender>();
+
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
