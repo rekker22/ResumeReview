@@ -35,6 +35,8 @@ namespace ResumeReview
             //        Configuration.GetConnectionString("DevelopmentConnection")));
 
 
+            services.AddHttpsRedirection(options => { options.HttpsPort = 443; });
+
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
             if (env == "Development")
