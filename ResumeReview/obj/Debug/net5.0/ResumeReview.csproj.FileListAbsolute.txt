@@ -479,11 +479,6 @@ E:\videoyt\goodProjects\ResumeReview\ResumeReview\obj\Debug\net5.0\Razor\Views\H
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\System.Drawing.Common.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Google.Apis.dll
-E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Google.Apis.Auth.PlatformServices.dll
-E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Google.Apis.Auth.dll
-E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Google.Apis.Core.dll
-E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Google.Apis.Drive.v3.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Npgsql.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\obj\Debug\net5.0\Razor\Views\Home\NoResume.cshtml.g.cs

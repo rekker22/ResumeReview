@@ -43,10 +43,6 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Google.Apis.Drive.v3": {
-              "target": "Package",
-              "version": "[1.55.0.2481, )"
-            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.9, )"

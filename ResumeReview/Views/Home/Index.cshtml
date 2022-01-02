@@ -12,7 +12,9 @@
 
 <div class="text-center w-100">
     <a class="btn btn-primary m-1" asp-area="" asp-controller="Home" asp-action="Resume">10 Second Review</a>
+    <i class="fa fa-info-circle" id="onhovershort" aria-hidden="true" data-toggle="tooltip" data-original-title="Review the resume only for 10 seconds"></i>
     <a class="btn btn-primary m-1" asp-area="" asp-controller="Home" asp-action="DetailedResume">Detailed Review</a>
+    <i class="fa fa-info-circle" id="onhoverlong" aria-hidden="true" data-toggle="tooltip" data-original-title="Review the resume as long as you want"></i>
     <form enctype="multipart/form-data" method="post" class="m-1">
         <div class="form-group">
             <span asp-for="@Model.resumeReviews"></span>
@@ -23,23 +25,24 @@
         <input asp-controller="Home" asp-action="Upload" class="btn btn-primary" type="submit" value="Upload" />
     </form>
 </div>
-<div class="row m-3 w-100">
+<div class="row justify-content-center m-3 w-100 ">
     @foreach (var resumereview in Model.resumeReviews)
     {
-        <div class="card text-center m-3 p-1" style="width: 250px; height: 400px; overflow: scroll;">
+        <div class="card m-3 p-1" style="width: 250px; height: 400px; overflow: scroll;">
+            <h4>@resumereview.Resume.ResumeName</h4>
             <h5>Resume Version:  @resumereview.Resume.VersionNumber</h5>
             <form method="post">
                 @if (resumereview.Resume.IsActive == true)
                 {
-                <input asp-controller="Home" asp-action="Disable" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-dark text-white m-1" style="width:100px;" type="submit" value="Disable" />
+                    <input asp-controller="Home" asp-action="Disable" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-dark text-white m-1" style="width:100px;" type="submit" value="Disable" />
                 }
                 else
                 {
-                    <input asp-controller="Home" asp-action="Enable" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-dark text-white m-1" style="width:100px;" type="submit" value="Enable"/>
+                    <input asp-controller="Home" asp-action="Enable" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-dark text-white m-1" style="width:100px;" type="submit" value="Enable" />
                 }
-                <input asp-controller="Home" asp-action="Delete" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-danger text-white m-1" style="width:100px;" type="submit" value="Delete"/>
+                <input asp-controller="Home" asp-action="Delete" asp-route-ResumeId="@resumereview.Resume.ResumeId" class="btn btn-danger text-white m-1" style="width:100px;" type="submit" value="Delete" />
             </form>
-                <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush">
                 @foreach (var review in resumereview.Reviews)
                 {
                     <li class="list-group-item"><h6 style="font-weight:bold;">Is it 10 sec Review? @review.ReviewType.Equals("ReviewNotDetailed")</h6><p>@review.Review</p></li>
@@ -49,7 +52,11 @@
         </div>
     }
 </div>
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
 
 
 

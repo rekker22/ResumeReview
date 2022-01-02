@@ -3,38 +3,59 @@
 }
 
 <div class="row">
-    <div class="col-md-6 offset-md-3">
-        <div class="card login-logout-tab">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href='/Identity/Account/Login'>Sign In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href='/Identity/Account/Register'>Sign Up</a>
-                    </li>
-                </ul>
+    <div class="col col-offset-md-3 mb-3">
+        <div class="card">
+            <div class="card-header" style="font-size: 25px;">
+                About Resume Review
             </div>
-            <div class="card-content">
-                <div class="col-md-12">
-                    @RenderBody()
-                </div>
+            <div class="card-body">
+                <h5 class="card-title">Purpose</h5>
+                <h4>One to place to get feedback and provide feedback to other Resume. It's a community-driven application, where the community will help each other in improving their Resume.</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Reason</h5>
+                <h4>To help Community in helping each other in the process of improving their resume and reviewing other's.</h4>
+                <a href="#" class="btn btn-primary mt-2">Login to Find out</a>
+            </div>
+        </div>
+        @*<h4 id="type"></h4>*@
+        @*<h4>One to place to get feedback and provide feedback to other Resume. It's a community-driven application, where the community will help each other in improving their Resume by giving comments on detailed reviews or by mimicking the HR 10-second review.</h4>*@
+    </div>
+    @*<div class="col-md-6 offset-md-3">*@
+    <div class="col col-offset-md-3 mb-3">
+    <div class="card login-logout-tab">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href='/Identity/Account/Login'>Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='/Identity/Account/Register'>Sign Up</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-content">
+            <div class="col-md-12">
+                @RenderBody()
             </div>
         </div>
     </div>
+
 </div>
 
-@section Scripts{
-    @RenderSection("Scripts", required: false)
-    <script>
-        $(function () {
-            var current = location.pathname;
-            $('.nav-tabs li a').each(function () {
-                var $this = $(this);
-                if (current.indexOf($this.attr('href')) !== -1) {
-                    $this.addClass('active');
-                }
+</div>
+
+    @section Scripts{
+        @RenderSection("Scripts", required: false)
+        <script>
+            $(function () {
+                var current = location.pathname;
+                $('.nav-tabs li a').each(function () {
+                    var $this = $(this);
+                    if (current.indexOf($this.attr('href')) !== -1) {
+                        $this.addClass('active');
+                    }
+                })
             })
-        })
-    </script >
-}
+        </script>
+    }
