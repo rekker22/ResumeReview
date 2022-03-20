@@ -20,20 +20,20 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "DATABASE_URL": "postgres://ujvnehhinrctfh:3a69e003c53a50744de6269773a90e45f55b0668abcc98ded1d26bcb10eb1149@ec2-54-73-110-26.eu-west-1.compute.amazonaws.com:5432/d6d1cgm4tec9g6",
-        "ASPNETCORE_ENVIRONMENT": "Production"
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "DATABASE_URL": "postgres://ujvnehhinrctfh:3a69e003c53a50744de6269773a90e45f55b0668abcc98ded1d26bcb10eb1149@ec2-54-73-110-26.eu-west-1.compute.amazonaws.com:5432/d6d1cgm4tec9g6"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "dotnetRunMessages": "true"
     },
     "WSL 2": {
       "commandName": "WSL2",
       "launchBrowser": true,
       "launchUrl": "https://localhost:5001",
       "environmentVariables": {
-        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation",
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000"
       },
       "distributionName": ""
     }

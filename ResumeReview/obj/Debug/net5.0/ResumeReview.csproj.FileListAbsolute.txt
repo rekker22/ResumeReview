@@ -488,3 +488,5 @@ E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\MailKit.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\MimeKit.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\NETCore.MailKit.dll
 E:\videoyt\goodProjects\ResumeReview\ResumeReview\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+E:\videoyt\goodProjects\ResumeReview\ResumeReview\obj\Debug\net5.0\ResumeReview.Properties.Resources.resources
+E:\videoyt\goodProjects\ResumeReview\ResumeReview\obj\Debug\net5.0\ResumeReview.csproj.GenerateResource.cache
