@@ -5,7 +5,12 @@
       "ProjectGuid": "e1e765aa-cc21-4f81-9067-522d8a9c0dd2",
       "DisplayName": "ResumeReview",
       "ColorIndex": 0
+    },
+    "d6566da1-622b-414f-959b-803c74480ea8": {
+      "ProjectGuid": "d6566da1-622b-414f-959b-803c74480ea8",
+      "DisplayName": "RazorStructure",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }
