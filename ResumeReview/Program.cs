@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ResumeReview.Service.Migration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace ResumeReview
     {
         public static void Main(string[] args)
         {
+            //Use only for production migration
+            //CreateHostBuilder(args).Build().MigrateDatabase().Run();
+
             CreateHostBuilder(args).Build().Run();
         }
 

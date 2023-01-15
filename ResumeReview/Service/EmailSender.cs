@@ -27,11 +27,13 @@ namespace ResumeReview.Service
             email.Subject = Subject;
             var builder = new BodyBuilder();
 
+            string mailPassword = Environment.GetEnvironmentVariable("mailPassword");
+
             builder.HtmlBody = Body;
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+            smtp.Authenticate(_mailSettings.Mail, mailPassword);
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }

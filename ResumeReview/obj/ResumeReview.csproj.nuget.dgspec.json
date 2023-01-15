@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\videoyt\\goodProjects\\ResumeReview\\ResumeReview\\ResumeReview.csproj": {}
+    "C:\\Projects\\ResumeReview\\ResumeReview\\ResumeReview.csproj": {}
   },
   "projects": {
-    "E:\\videoyt\\goodProjects\\ResumeReview\\ResumeReview\\ResumeReview.csproj": {
+    "C:\\Projects\\ResumeReview\\ResumeReview\\ResumeReview.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\videoyt\\goodProjects\\ResumeReview\\ResumeReview\\ResumeReview.csproj",
+        "projectUniqueName": "C:\\Projects\\ResumeReview\\ResumeReview\\ResumeReview.csproj",
         "projectName": "ResumeReview",
-        "projectPath": "E:\\videoyt\\goodProjects\\ResumeReview\\ResumeReview\\ResumeReview.csproj",
-        "packagesPath": "C:\\Users\\123\\.nuget\\packages\\",
-        "outputPath": "E:\\videoyt\\goodProjects\\ResumeReview\\ResumeReview\\obj\\",
+        "projectPath": "C:\\Projects\\ResumeReview\\ResumeReview\\ResumeReview.csproj",
+        "packagesPath": "C:\\Users\\rekker22\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\ResumeReview\\ResumeReview\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\123\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rekker22\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[5.0.11, )"
             },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
@@ -93,7 +97,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -105,7 +110,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

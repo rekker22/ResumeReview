@@ -53,9 +53,9 @@ namespace ResumeReview
                 services.AddDbContextPool<ApplicationDbContext>(options =>
                 {
                     // Use connection string provided at runtime by Heroku.
-                    //var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                    var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-                    var connUrl = Configuration.GetConnectionString("ProductionConnection");
+                    //var connUrl = Configuration.GetConnectionString("ProductionConnection");
                     // Parse connection URL to connection string for Npgsql
                     connUrl = connUrl.Replace("postgres://", string.Empty);
                     var pgUserPass = connUrl.Split("@")[0];
@@ -65,7 +65,8 @@ namespace ResumeReview
                     var pgUser = pgUserPass.Split(":")[0];
                     var pgPass = pgUserPass.Split(":")[1];
                     var pgHost = pgHostPort.Split(":")[0];
-                    var pgPort = pgHostPort.Split(":")[1];
+                    //var pgPort = pgHostPort.Split(":")[1];
+                    var pgPort = 5432;
 
                     string connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
                     options.UseNpgsql(connStr);
@@ -74,6 +75,7 @@ namespace ResumeReview
             }
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
             services.AddTransient<IEmailSender, EmailSender>();
 
 

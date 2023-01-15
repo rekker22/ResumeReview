@@ -87,7 +87,9 @@ namespace ResumeReview.Controllers
 
             string ResumeFileExtension = Path.GetExtension(file.FileName);
 
-            var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+            //var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+
+            var ClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
 
             var DriveName = _configuration.GetSection("Storage")["ResumeStorage"];
 
@@ -279,7 +281,9 @@ namespace ResumeReview.Controllers
 
             var uri = _configuration.GetSection("APIs")["Temp_Url"];
 
-            var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+            //var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+
+            var ClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
 
             var _fus = new FileUploadService(_httpClientFactory, ClientSecret);
 
@@ -312,7 +316,9 @@ namespace ResumeReview.Controllers
 
             var uri = _configuration.GetSection("APIs")["Temp_Url"];
 
-            var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+            //var ClientSecret = _configuration.GetSection("Storage")["ClientSecret"];
+
+            var ClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
 
             var _fus = new FileUploadService(_httpClientFactory, ClientSecret);
 
