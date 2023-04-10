@@ -25,7 +25,7 @@ namespace ResumeReview.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly ApplicationDbContext _context;
+        private readonly ResumeReviewDbContext _context;
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -33,10 +33,10 @@ namespace ResumeReview.Controllers
 
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public HomeController(ILogger<HomeController> logger, ResumeReviewDbContext resumeReviewDbContext, IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
-            _context = applicationDbContext;
+            _context = resumeReviewDbContext;
             _httpContextAccessor = httpContextAccessor;
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;

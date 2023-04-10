@@ -14,9 +14,9 @@ namespace ResumeReview.Controllers
     [ApiController]
     public class ReviewsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ResumeReviewDbContext _context;
 
-        public ReviewsController(ApplicationDbContext context)
+        public ReviewsController(ResumeReviewDbContext context)
         {
             _context = context;
         }

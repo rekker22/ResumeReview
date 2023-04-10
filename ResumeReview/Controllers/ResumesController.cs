@@ -17,7 +17,7 @@ namespace ResumeReview.Controllers
     [ApiController]
     public class ResumesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ResumeReviewDbContext _context;
 
         //static string[] Scopes = { DriveService.Scope.DriveFile };
         //static string ApplicationName = "ResumeReview";
@@ -100,7 +100,7 @@ namespace ResumeReview.Controllers
 
 
 
-        public ResumesController(ApplicationDbContext context)
+        public ResumesController(ResumeReviewDbContext context)
         {
             _context = context;
         }

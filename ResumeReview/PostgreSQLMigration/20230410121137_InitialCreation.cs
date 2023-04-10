@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace ResumeReview.Migrations.ResumeReviewDb
+#nullable disable
+
+namespace ResumeReview.PostgreSQLMigration
 {
-    public partial class InitialProd : Migration
+    public partial class InitialCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,7 +65,7 @@ namespace ResumeReview.Migrations.ResumeReviewDb
                     Uri = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    UploadDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UploadDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UploaderId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -186,7 +188,8 @@ namespace ResumeReview.Migrations.ResumeReviewDb
                     ResumeId = table.Column<int>(type: "integer", nullable: true),
                     Review = table.Column<string>(type: "text", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    ReviewDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ReviewType = table.Column<string>(type: "text", nullable: true),
+                    ReviewDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ReviewerId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -196,8 +199,7 @@ namespace ResumeReview.Migrations.ResumeReviewDb
                         name: "FK_Reviews_Resume_ResumeId",
                         column: x => x.ResumeId,
                         principalTable: "Resume",
-                        principalColumn: "ResumeId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ResumeId");
                 });
 
             migrationBuilder.CreateTable(
@@ -208,7 +210,7 @@ namespace ResumeReview.Migrations.ResumeReviewDb
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ResumeId = table.Column<int>(type: "integer", nullable: true),
                     UserViewedId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserViewedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    UserViewedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -217,8 +219,7 @@ namespace ResumeReview.Migrations.ResumeReviewDb
                         name: "FK_UserViewed_Resume_ResumeId",
                         column: x => x.ResumeId,
                         principalTable: "Resume",
-                        principalColumn: "ResumeId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ResumeId");
                 });
 
             migrationBuilder.CreateIndex(

@@ -14,9 +14,9 @@ namespace ResumeReview.Controllers
     [ApiController]
     public class UserViewedsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ResumeReviewDbContext _context;
 
-        public UserViewedsController(ApplicationDbContext context)
+        public UserViewedsController(ResumeReviewDbContext context)
         {
             _context = context;
         }

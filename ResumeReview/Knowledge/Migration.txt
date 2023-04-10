@@ -5,3 +5,9 @@ to keep db connection secret we removed it from appsetting and bring up when we 
 Change Dbcontext in else to ResumeReviewDbContext and comment out the whole if not else
 
 Once done change back to applicationdbContext in else and uncomment
+
+
+-----New Migration Technique
+only use below command
+
+update-database -Context ResumeReviewDbContext -connection "User Id=thextendlistdb_j2f5_user;Password=x81biztWafG2WEgx99ufsoMf6UKRqYDq;Host=dpg-cgpesi8u9tun42t2ge6g-a.frankfurt-postgres.render.com;Port=5432;Database=thextendlistdb_j2f5;sslmode=Require;Trust Server Certificate=true;"

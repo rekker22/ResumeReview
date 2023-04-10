@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production",
-        "DATABASE_URL": "postgres://ncov1_0_user:vjHng2x4hZJGKN9oStdZDQoxthigN51w@dpg-cespc15a499cn4ggk8og-a.singapore-postgres.render.com/ncov1_0",
+        "DATABASE_URL": "postgres://thextendlistdb_j2f5_user:x81biztWafG2WEgx99ufsoMf6UKRqYDq@dpg-cgpesi8u9tun42t2ge6g-a.frankfurt-postgres.render.com/thextendlistdb_j2f5",
         "mailPassword": "LetsGo@123",
         "ClientSecret": "4-TfGDbfD54AAAAAAAAAATMl52TVcj1sxGUbPvfxIg_N_aRHqPU6WbBjreluR8LQ"
       },

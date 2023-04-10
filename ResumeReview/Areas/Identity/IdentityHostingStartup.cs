@@ -17,54 +17,21 @@ namespace ResumeReview.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
 
                 //services.AddDbContext<ResumeReviewDbContext>(options =>
                 //    options.UseSqlServer(
                 //        context.Configuration.GetConnectionString("ResumeReviewDbContextConnection")));
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            if (env == "Development")
-            {
-                services.AddDbContextPool<ApplicationDbContext>(options =>
-                    {
-                        string connStr = context.Configuration.GetConnectionString("DevelopmentConnection");
-                        options.UseSqlServer(connStr);
-                    });
-
-                services.AddDefaultIdentity<ApplicationUser>(options =>
+                if (env == "Development")
                 {
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireUppercase = false;
-                    options.SignIn.RequireConfirmedAccount = true;
-                })
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            }
-            else
-            {
-                services.AddDbContextPool<ApplicationDbContext>(options =>
-                    {
-                        // Use connection string provided at runtime by Heroku.
-                        var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-
-                        //var connUrl = context.Configuration.GetConnectionString("ProductionConnection");
-                        // Parse connection URL to connection string for Npgsql
-                        connUrl = connUrl.Replace("postgres://", string.Empty);
-                        var pgUserPass = connUrl.Split("@")[0];
-                        var pgHostPortDb = connUrl.Split("@")[1];
-                        var pgHostPort = pgHostPortDb.Split("/")[0];
-                        var pgDb = pgHostPortDb.Split("/")[1];
-                        var pgUser = pgUserPass.Split(":")[0];
-                        var pgPass = pgUserPass.Split(":")[1];
-                        var pgHost = pgHostPort.Split(":")[0];
-                        //var pgPort = pgHostPort.Split(":")[1];
-                        var pgPort = 5432;
-
-                        string connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
-                        options.UseNpgsql(connStr);
-
-                    });
+                    services.AddDbContextPool<ResumeReviewDbContext>(options =>
+                        {
+                            string connStr = context.Configuration.GetConnectionString("DevelopmentConnection");
+                            options.UseNpgsql(connStr);
+                        });
 
                     services.AddDefaultIdentity<ApplicationUser>(options =>
                     {
@@ -72,7 +39,43 @@ namespace ResumeReview.Areas.Identity
                         options.Password.RequireUppercase = false;
                         options.SignIn.RequireConfirmedAccount = true;
                     })
-                        .AddEntityFrameworkStores<ApplicationDbContext>();
+                        .AddEntityFrameworkStores<ResumeReviewDbContext>();
+
+                }
+                else
+                {
+                    services.AddDbContextPool<ResumeReviewDbContext>(options =>
+                        {
+                            // Use connection string provided at runtime by Heroku.
+                            var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+                            //var connUrl = context.Configuration.GetConnectionString("ProductionConnection");
+                            // Parse connection URL to connection string for Npgsql
+                            connUrl = connUrl.Replace("postgres://", string.Empty);
+                            var pgUserPass = connUrl.Split("@")[0];
+                            var pgHostPortDb = connUrl.Split("@")[1];
+                            var pgHostPort = pgHostPortDb.Split("/")[0];
+                            var pgDb = pgHostPortDb.Split("/")[1];
+                            var pgUser = pgUserPass.Split(":")[0];
+                            var pgPass = pgUserPass.Split(":")[1];
+                            var pgHost = pgHostPort.Split(":")[0];
+                            //var pgPort = pgHostPort.Split(":")[1];
+                            var pgPort = 5432;
+
+                            //string connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
+
+                            string connStr = $"User Id={pgUser};Password={pgPass};Host={pgHost};Port={pgPort};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
+                            options.UseNpgsql(connStr);
+
+                        });
+
+                    services.AddDefaultIdentity<ApplicationUser>(options =>
+                    {
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireUppercase = false;
+                        options.SignIn.RequireConfirmedAccount = true;
+                    })
+                        .AddEntityFrameworkStores<ResumeReviewDbContext>();
                 }
 
 
