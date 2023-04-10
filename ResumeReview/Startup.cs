@@ -41,7 +41,7 @@ namespace ResumeReview
 
             if (env == "Development")
             {
-                services.AddDbContextPool<ApplicationDbContext>(options =>
+                services.AddDbContextPool<ResumeReviewDbContext>(options =>
                 {
                     string connStr = Configuration.GetConnectionString("DevelopmentConnection");
                     options.UseNpgsql(connStr);
@@ -68,9 +68,9 @@ namespace ResumeReview
                     //var pgPort = pgHostPort.Split(":")[1];
                     var pgPort = 5432;
 
-                    //string connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
+                    string connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
 
-                    string connStr = $"User Id={pgUser};Password={pgPass};Host={pgHost};Port={pgPort};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
+                    //string connStr = $"User Id={pgUser};Password={pgPass};Host={pgHost};Port={pgPort};Database={pgDb};sslmode=Require;Trust Server Certificate=true;";
                     options.UseNpgsql(connStr);
 
                 });

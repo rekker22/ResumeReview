@@ -21,7 +21,7 @@ namespace ResumeReview.Service.Migration
                 using (var scope = serviceScopeFactory.CreateScope())
                 {
                     var services = scope.ServiceProvider;
-                    var dbContext = services.GetRequiredService<ApplicationDbContext>();
+                    var dbContext = services.GetRequiredService<ResumeReviewDbContext>();
 
                     dbContext.Database.Migrate();
                 }
